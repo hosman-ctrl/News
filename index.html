@@ -1,175 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BBC News · Telegram Mini App</title>
-    <!-- Telegram WebApp script -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Font Awesome for Telegram icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        /* Fixed top bar – centered join button */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px 16px;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .join-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #2AABEE;  /* Telegram blue */
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: background 0.2s;
-            box-shadow: 0 4px 10px rgba(42,171,238,0.2);
-            cursor: pointer;
-            letter-spacing: 0.3px;
-        }
-        .join-button i {
-            font-size: 20px;
-        }
-        .join-button:hover {
-            background: #1e95c9;
-        }
-        /* push content below fixed bar */
-        .spacer {
-            margin-top: 80px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 16px;
-            text-align: center;
-        }
-        .message {
-            color: #666;
-            font-size: 15px;
-            max-width: 300px;
-            background: #f8f9fa;
-            padding: 14px 20px;
-            border-radius: 30px;
-            border: 1px solid #e9ecef;
-        }
-        .message i {
-            color: #2AABEE;
-            margin-right: 6px;
-        }
-        /* Telegram WebApp background compatibility */
-        body.telegram-light, body.telegram-dark {
-            background: var(--tg-theme-bg-color, #fff);
-            color: var(--tg-theme-text-color, #000);
-        }
-        .join-button {
-            background: var(--tg-theme-button-color, #2AABEE);
-            color: var(--tg-theme-button-text-color, white);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>BBC • thumb reach</title>
+  <style>
+    /* reset + modern system stack */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0c10;       /* deep base – lets colours pop */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ----- ANIMATED BACKGROUND – modern colours, organic shapes, soft blur ----- */
+    .blob-scene {
+      position: fixed;           /* covers entire viewport, no scroll */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;      /* so clicks pass through to button */
+    }
+
+    .blob {
+      position: absolute;
+      filter: blur(60px);        /* dreamy, modern glow – shapes melt together */
+      opacity: 0.65;
+      border-radius: 79% 21% 61% 39% / 56% 47% 53% 44%;   /* irregular, organic – never a perfect circle */
+      animation: floatBlob 18s infinite alternate ease-in-out;
+      will-change: transform, scale, left, top;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 80%);
+      mix-blend-mode: screen;    /* luminous blending – modern colour layering */
+    }
+
+    /* distinct sizes, hues, motion – each blob is unique */
+    .blob-1 {
+      width: 500px;
+      height: 500px;
+      background: #FF6B6B;       /* coral red */
+      left: -150px;
+      top: -100px;
+      animation-duration: 22s;
+      animation-delay: -2s;
+    }
+    .blob-2 {
+      width: 420px;
+      height: 420px;
+      background: #4ECDC4;       /* soft turquoise */
+      right: -80px;
+      bottom: 20px;
+      animation-duration: 25s;
+      animation-delay: -5s;
+      border-radius: 67% 33% 52% 48% / 43% 58% 42% 57%;
+    }
+    .blob-3 {
+      width: 550px;
+      height: 550px;
+      background: #FFE66D;       /* mellow yellow */
+      left: 20%;
+      top: -200px;
+      animation-duration: 20s;
+      animation-delay: -1s;
+      border-radius: 44% 56% 70% 30% / 58% 51% 49% 42%;
+    }
+    .blob-4 {
+      width: 380px;
+      height: 380px;
+      background: #BF9ACA;       /* lavender */
+      right: 10%;
+      top: 40%;
+      animation-duration: 28s;
+      animation-delay: -12s;
+      border-radius: 38% 62% 44% 56% / 53% 49% 51% 47%;
+    }
+    .blob-5 {
+      width: 600px;
+      height: 600px;
+      background: #FF8C69;       /* warm peach */
+      left: -200px;
+      bottom: -100px;
+      animation-duration: 30s;
+      animation-delay: -7s;
+      border-radius: 73% 27% 48% 52% / 61% 44% 56% 39%;
+    }
+    .blob-6 {
+      width: 340px;
+      height: 340px;
+      background: #A0E7E5;       /* pale mint */
+      right: -50px;
+      top: -50px;
+      animation-duration: 19s;
+      animation-delay: -3s;
+      border-radius: 81% 19% 67% 33% / 37% 73% 27% 63%;
+    }
+    .blob-7 {
+      width: 480px;
+      height: 480px;
+      background: #FDA7DF;       /* candy pink */
+      left: 40%;
+      bottom: 0px;
+      animation-duration: 26s;
+      animation-delay: -9s;
+      border-radius: 56% 44% 39% 61% / 72% 28% 72% 28%;
+    }
+    .blob-8 {
+      width: 520px;
+      height: 520px;
+      background: #6c5ce7;       /* periwinkle */
+      left: 60%;
+      top: 60%;
+      animation-duration: 24s;
+      animation-delay: -15s;
+      border-radius: 29% 71% 36% 64% / 59% 48% 52% 41%;
+    }
+    .blob-9 {
+      width: 300px;
+      height: 300px;
+      background: #F9D56E;       /* golden */
+      left: 5%;
+      bottom: 30%;
+      animation-duration: 21s;
+      animation-delay: -4s;
+      border-radius: 92% 8% 82% 18% / 37% 86% 14% 63%;
+    }
+    .blob-10 {
+      width: 460px;
+      height: 460px;
+      background: #E17055;       /* terracotta */
+      right: 15%;
+      top: 70%;
+      animation-duration: 27s;
+      animation-delay: -11s;
+      border-radius: 33% 67% 49% 51% / 66% 31% 69% 34%;
+    }
+
+    /* smooth, slow, wandering motion — feels organic */
+    @keyframes floatBlob {
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      33% {
+        transform: translate(3%, 4%) scale(1.12) rotate(2deg);
+      }
+      67% {
+        transform: translate(-4%, -2%) scale(0.94) rotate(-3deg);
+      }
+      100% {
+        transform: translate(2%, -4%) scale(1.05) rotate(4deg);
+      }
+    }
+
+    /* ----- CONTENT – LOWERED FOR THUMB ----- */
+    .content {
+      position: relative;
+      z-index: 20;              /* above blobs */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* PUSH EVERYTHING TO BOTTOM — thumb friendly */
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 20px 20px max(30px, env(safe-area-inset-bottom, 24px)) 20px;
+      box-sizing: border-box;
+      pointer-events: none;     /* container doesn't trap clicks, button is clickable */
+    }
+
+    /* ----- LARGE BBC BUTTON – theme colours: red, white, black accent ----- */
+    .bbc-button {
+      pointer-events: auto;     /* re-enable clicks */
+      display: inline-block;
+      background: #BB1919;      /* BBC news red – iconic */
+      color: white;
+      border: none;
+      border-radius: 28px;      /* pill shape, modern and friendly */
+      padding: 0.8em 1.8em;
+      font-size: clamp(2.2rem, 12vw, 3.8rem);   /* always large, never tiny */
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      box-shadow: 
+        0 16px 28px -8px rgba(0,0,0,0.4),
+        0 0 0 4px rgba(255,255,255,0.2),        /* white outline – BBC block accent */
+        inset 0 -4px 0 rgba(0,0,0,0.2);
+      transition: transform 0.12s ease, background 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      max-width: 90vw;
+      text-align: center;
+      line-height: 1.2;
+      border: 2px solid rgba(255,255,255,0.8);  /* crisp white border – BBC vibe */
+      margin-bottom: 8px;        /* a little lift from bottom edge */
+      backdrop-filter: blur(4px); /* subtle glass, ties with background */
+      background: linear-gradient(145deg, #c01e1e, #ac1515);  # subtle depth
+    }
+
+    /* secondary BBC colours: black + white appear in hover + active */
+    .bbc-button:hover {
+      background: #a51414;
+      transform: scale(1.02);
+      box-shadow: 
+        0 22px 32px -6px black,
+        0 0 0 6px rgba(255,255,255,0.3),
+        inset 0 -4px 0 rgba(0,0,0,0.3);
+    }
+
+    .bbc-button:active {
+      transform: scale(0.97);
+      box-shadow: 
+        0 8px 18px -4px black,
+        0 0 0 6px rgba(255,255,255,0.5),
+        inset 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    /* focus state – accessibility + BBC black/yellow? but we keep red/white */
+    .bbc-button:focus-visible {
+      outline: 4px solid white;
+      outline-offset: 4px;
+    }
+
+    /* optional small descriptor – still lower, but minimal */
+    .thumb-hint {
+      pointer-events: auto;
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 16px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 24px;
+      border-radius: 60px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: 0.2s;
+    }
+
+    .thumb-hint span {
+      font-weight: 700;
+      color: white;
+    }
+
+    /* everything lowered – additional bottom spacing only if needed */
+    @media (max-width: 480px) {
+      .bbc-button {
+        font-size: 2.5rem;
+        padding: 0.7em 1.4em;
+        border-radius: 24px;
+      }
+      .thumb-hint {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+      }
+    }
+
+    /* for taller screens, keep content at bottom */
+    @media (min-height: 700px) {
+      .content {
+        padding-bottom: max(48px, env(safe-area-inset-bottom, 36px));
+      }
+    }
+
+    /* iPhone safe area + very bottom thumb zone */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .content {
+        padding-bottom: max(36px, env(safe-area-inset-bottom, 30px));
+      }
+    }
+
+    /* bonus: bbc blocks vibe – subtle square in background? but we keep blob scene modern */
+  </style>
 </head>
 <body>
-    <!-- Fixed top bar with centered join button -->
-    <div class="top-bar">
-        <a href="https://t.me/bbc_news_eng" 
-           class="join-button" 
-           target="_blank" 
-           rel="noopener noreferrer">
-            <i class="fab fa-telegram-plane"></i>
-            Join my BBC Telegram Channel
-        </a>
+
+  <!-- ANIMATED MODERN BACKGROUND – organic blobs, BBC theme colours reinterpreted -->
+  <div class="blob-scene">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-6"></div>
+    <div class="blob blob-7"></div>
+    <div class="blob blob-8"></div>
+    <div class="blob blob-9"></div>
+    <div class="blob blob-10"></div>
+  </div>
+
+  <!-- MAIN INTERFACE – PUSHED DOWN FOR EASY THUMB REACH -->
+  <div class="content">
+    <!-- extra gentle hint (still within thumb zone) -->
+    <div class="thumb-hint">
+      <span>● BBC ●</span>  tap to open
     </div>
 
-    <!-- Main content area – user sees this after BBC opens -->
-    <div class="spacer">
-        <div class="message">
-            <i class="fas fa-check-circle"></i>
-            BBC News is opening in Telegram browser…
-        </div>
-        <p style="margin-top: 24px; font-size: 14px; color: #888;">
-            ⚡ Use the button above to join the channel.<br>
-            ↻ If BBC does not open, tap 
-            <a href="#" id="manualOpen" style="color: #2AABEE; text-decoration: none; font-weight: 500;">here</a>.
-        </p>
-    </div>
+    <!-- LARGE BBC BUTTON — opens bbc.com in new tab -->
+    <button id="bbcOpenBtn" class="bbc-button">
+      OPEN BBC
+    </button>
+    <!-- subtle spacer (no extra content) – button is massive, thumb loves it -->
+  </div>
 
-    <script>
-        // --- TELEGRAM WEBAPP INIT ---
-        const tg = window.Telegram?.WebApp;
-        if (tg) {
-            tg.ready();          // Notify Telegram that the app is ready
-            tg.expand();         // Use full height – no collapsing
-            // Optional: set theme colors (already handled by CSS vars)
-        }
+  <script>
+    (function() {
+      "use strict";
+      
+      const bbcButton = document.getElementById('bbcOpenBtn');
+      
+      // Open BBC official website in new tab – respects user choice
+      function openBBC() {
+        window.open('https://www.bbc.com/', '_blank', 'noopener,noreferrer');
+        // optional haptic feedback for modern devices? just a clean open.
+      }
 
-        // --- AUTO-OPEN BBC NEWS IN TELEGRAM IN-APP BROWSER (once per session) ---
-        const BBC_URL = 'https://www.bbc.com/news';
-        const OPENED_KEY = 'bbc_opened_in_session';
-
-        function openBBC() {
-            if (tg && tg.openLink) {
-                // Opens inside Telegram's in-app browser – best user experience
-                tg.openLink(BBC_URL);
-            } else {
-                // Fallback for testing outside Telegram
-                window.open(BBC_URL, '_blank');
-            }
-        }
-
-        // Automatic opening on page load – but only once to avoid spam
-        if (!sessionStorage.getItem(OPENED_KEY)) {
-            // Small delay ensures Telegram WebApp is fully initialized
-            setTimeout(() => {
-                openBBC();
-                sessionStorage.setItem(OPENED_KEY, 'true');
-            }, 300);
-        }
-
-        // --- MANUAL TRIGGER (if auto-open fails or user needs it again) ---
-        document.getElementById('manualOpen').addEventListener('click', function(e) {
-            e.preventDefault();
-            openBBC();
+      // attach event listeners
+      if (bbcButton) {
+        bbcButton.addEventListener('click', (e) => {
+          e.preventDefault();   // no double action if button inside form
+          openBBC();
         });
 
-        // --- ENSURE JOIN BUTTON OPENS INSIDE TELEGRAM (or fallback) ---
-        // Improve t.me/ link behavior: try to open in Telegram, not external browser
-        document.querySelector('.join-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            const channelUrl = this.href; // https://t.me/bbc_news_eng
-            if (tg && tg.openLink) {
-                tg.openLink(channelUrl);   // opens in Telegram browser → instantly redirects to Telegram app
-            } else {
-                window.open(channelUrl, '_blank');
-            }
-        });
-    </script>
+        // touch devices – ensure no 300ms weirdness, response instant
+        bbcButton.addEventListener('touchstart', (e) => {
+          // just to feel snappy; we don't interfere
+        }, { passive: true });
+      }
+
+      // Small UX: if someone expects 'Enter' key to work - natively it does on button.
+    })();
+  </script>
+
+  <!-- 
+    DESIGN NOTES:
+    –––  BBC THEME COLOURS  –––
+    * Primary button: #BB1919 (BBC News red), white text, white/black accents.
+    * Background blobs include #FF6B6B (modern red), #4ECDC4 (cyan), #FFE66D (yellow)
+      and others – all contemporary, vibrant, and dynamic.
+    –––  LOWERED FOR THUMB  –––
+    * Flex column with justify-content: flex-end pushes everything to bottom.
+    * Large padding-bottom respects safe areas, so thumb reaches without stretch.
+    * Button is MASSIVE (clamp 2.2rem–3.8rem) and placed near bottom edge.
+    –––  ANIMATED SHAPES  –––
+    * 10 irregular, soft-filtered blobs with distinct sizes and slow float.
+    * mix-blend-mode: screen + radial gradients for modern luminosity.
+    * border-radius values are organic (never perfect circles).
+    * continuous ease-in-out alternate motion.
+  -->
 </body>
 </html>

@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>BBC • thumb reach</title>
+  <title>BBC • thumb reach + telegram + bouncy icons</title>
+  <!-- Font Awesome 6 (free) – for news, sports, music, financial icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* reset + modern system stack */
     * {
@@ -20,215 +22,231 @@
       position: relative;
     }
 
-    /* ----- ANIMATED BACKGROUND – modern colours, organic shapes, soft blur ----- */
+    /* ----- ANIMATED BACKGROUND – modern blobs (retained) ----- */
     .blob-scene {
-      position: fixed;           /* covers entire viewport, no scroll */
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
       overflow: hidden;
-      pointer-events: none;      /* so clicks pass through to button */
+      pointer-events: none;
     }
 
     .blob {
       position: absolute;
-      filter: blur(60px);        /* dreamy, modern glow – shapes melt together */
+      filter: blur(60px);
       opacity: 0.65;
-      border-radius: 79% 21% 61% 39% / 56% 47% 53% 44%;   /* irregular, organic – never a perfect circle */
+      border-radius: 79% 21% 61% 39% / 56% 47% 53% 44%;
       animation: floatBlob 18s infinite alternate ease-in-out;
       will-change: transform, scale, left, top;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 80%);
-      mix-blend-mode: screen;    /* luminous blending – modern colour layering */
+      mix-blend-mode: screen;
     }
 
-    /* distinct sizes, hues, motion – each blob is unique */
-    .blob-1 {
-      width: 500px;
-      height: 500px;
-      background: #FF6B6B;       /* coral red */
-      left: -150px;
-      top: -100px;
-      animation-duration: 22s;
-      animation-delay: -2s;
-    }
-    .blob-2 {
-      width: 420px;
-      height: 420px;
-      background: #4ECDC4;       /* soft turquoise */
-      right: -80px;
-      bottom: 20px;
-      animation-duration: 25s;
-      animation-delay: -5s;
-      border-radius: 67% 33% 52% 48% / 43% 58% 42% 57%;
-    }
-    .blob-3 {
-      width: 550px;
-      height: 550px;
-      background: #FFE66D;       /* mellow yellow */
-      left: 20%;
-      top: -200px;
-      animation-duration: 20s;
-      animation-delay: -1s;
-      border-radius: 44% 56% 70% 30% / 58% 51% 49% 42%;
-    }
-    .blob-4 {
-      width: 380px;
-      height: 380px;
-      background: #BF9ACA;       /* lavender */
-      right: 10%;
-      top: 40%;
-      animation-duration: 28s;
-      animation-delay: -12s;
-      border-radius: 38% 62% 44% 56% / 53% 49% 51% 47%;
-    }
-    .blob-5 {
-      width: 600px;
-      height: 600px;
-      background: #FF8C69;       /* warm peach */
-      left: -200px;
-      bottom: -100px;
-      animation-duration: 30s;
-      animation-delay: -7s;
-      border-radius: 73% 27% 48% 52% / 61% 44% 56% 39%;
-    }
-    .blob-6 {
-      width: 340px;
-      height: 340px;
-      background: #A0E7E5;       /* pale mint */
-      right: -50px;
-      top: -50px;
-      animation-duration: 19s;
-      animation-delay: -3s;
-      border-radius: 81% 19% 67% 33% / 37% 73% 27% 63%;
-    }
-    .blob-7 {
-      width: 480px;
-      height: 480px;
-      background: #FDA7DF;       /* candy pink */
-      left: 40%;
-      bottom: 0px;
-      animation-duration: 26s;
-      animation-delay: -9s;
-      border-radius: 56% 44% 39% 61% / 72% 28% 72% 28%;
-    }
-    .blob-8 {
-      width: 520px;
-      height: 520px;
-      background: #6c5ce7;       /* periwinkle */
-      left: 60%;
-      top: 60%;
-      animation-duration: 24s;
-      animation-delay: -15s;
-      border-radius: 29% 71% 36% 64% / 59% 48% 52% 41%;
-    }
-    .blob-9 {
-      width: 300px;
-      height: 300px;
-      background: #F9D56E;       /* golden */
-      left: 5%;
-      bottom: 30%;
-      animation-duration: 21s;
-      animation-delay: -4s;
-      border-radius: 92% 8% 82% 18% / 37% 86% 14% 63%;
-    }
-    .blob-10 {
-      width: 460px;
-      height: 460px;
-      background: #E17055;       /* terracotta */
-      right: 15%;
-      top: 70%;
-      animation-duration: 27s;
-      animation-delay: -11s;
-      border-radius: 33% 67% 49% 51% / 66% 31% 69% 34%;
-    }
+    /* 10 organic blobs – keep modern, colourful */
+    .blob-1 { width: 500px; height: 500px; background: #FF6B6B; left: -150px; top: -100px; animation-duration: 22s; animation-delay: -2s; }
+    .blob-2 { width: 420px; height: 420px; background: #4ECDC4; right: -80px; bottom: 20px; animation-duration: 25s; animation-delay: -5s; border-radius: 67% 33% 52% 48% / 43% 58% 42% 57%; }
+    .blob-3 { width: 550px; height: 550px; background: #FFE66D; left: 20%; top: -200px; animation-duration: 20s; animation-delay: -1s; border-radius: 44% 56% 70% 30% / 58% 51% 49% 42%; }
+    .blob-4 { width: 380px; height: 380px; background: #BF9ACA; right: 10%; top: 40%; animation-duration: 28s; animation-delay: -12s; border-radius: 38% 62% 44% 56% / 53% 49% 51% 47%; }
+    .blob-5 { width: 600px; height: 600px; background: #FF8C69; left: -200px; bottom: -100px; animation-duration: 30s; animation-delay: -7s; border-radius: 73% 27% 48% 52% / 61% 44% 56% 39%; }
+    .blob-6 { width: 340px; height: 340px; background: #A0E7E5; right: -50px; top: -50px; animation-duration: 19s; animation-delay: -3s; border-radius: 81% 19% 67% 33% / 37% 73% 27% 63%; }
+    .blob-7 { width: 480px; height: 480px; background: #FDA7DF; left: 40%; bottom: 0px; animation-duration: 26s; animation-delay: -9s; border-radius: 56% 44% 39% 61% / 72% 28% 72% 28%; }
+    .blob-8 { width: 520px; height: 520px; background: #6c5ce7; left: 60%; top: 60%; animation-duration: 24s; animation-delay: -15s; border-radius: 29% 71% 36% 64% / 59% 48% 52% 41%; }
+    .blob-9 { width: 300px; height: 300px; background: #F9D56E; left: 5%; bottom: 30%; animation-duration: 21s; animation-delay: -4s; border-radius: 92% 8% 82% 18% / 37% 86% 14% 63%; }
+    .blob-10 { width: 460px; height: 460px; background: #E17055; right: 15%; top: 70%; animation-duration: 27s; animation-delay: -11s; border-radius: 33% 67% 49% 51% / 66% 31% 69% 34%; }
 
-    /* smooth, slow, wandering motion — feels organic */
     @keyframes floatBlob {
-      0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-      }
-      33% {
-        transform: translate(3%, 4%) scale(1.12) rotate(2deg);
-      }
-      67% {
-        transform: translate(-4%, -2%) scale(0.94) rotate(-3deg);
-      }
-      100% {
-        transform: translate(2%, -4%) scale(1.05) rotate(4deg);
-      }
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33% { transform: translate(3%, 4%) scale(1.12) rotate(2deg); }
+      67% { transform: translate(-4%, -2%) scale(0.94) rotate(-3deg); }
+      100% { transform: translate(2%, -4%) scale(1.05) rotate(4deg); }
     }
 
-    /* ----- CONTENT – LOWERED FOR THUMB ----- */
+    /* ----- BOUNCY THEMED ART – news, sports, music, financial ----- */
+    .art-scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;               /* above blobs, below content (which is 20) */
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bouncy-icon {
+      position: absolute;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 15px rgba(0,0,0,0.5), 0 8px 20px rgba(0,0,0,0.3);
+      filter: drop-shadow(0 6px 8px rgba(0,0,0,0.2));
+      opacity: 0.7;
+      will-change: transform;
+      /* default animation, overridden by up/down classes */
+      animation-duration: 2.8s, 6s;
+      animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1), ease-in-out;
+      animation-iteration-count: infinite, infinite;
+      animation-delay: 0s, 0s;
+    }
+
+    /* BOUNCE UP – moves upward with a lively bounce */
+    .bounce-up {
+      animation-name: bounceUp, floatAround;
+    }
+
+    /* BOUNCE DOWN – moves downward with bounce */
+    .bounce-down {
+      animation-name: bounceDown, floatAround;
+    }
+
+    /* core bounce – up */
+    @keyframes bounceUp {
+      0% { transform: translateY(0) scale(1); }
+      20% { transform: translateY(-35px) scale(1.1); }
+      35% { transform: translateY(-10px) scale(0.98); }
+      50% { transform: translateY(-22px) scale(1.03); }
+      65% { transform: translateY(-5px) scale(0.99); }
+      80% { transform: translateY(-12px) scale(1.01); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* core bounce – down */
+    @keyframes bounceDown {
+      0% { transform: translateY(0) scale(1); }
+      20% { transform: translateY(35px) scale(1.1); }
+      35% { transform: translateY(10px) scale(0.98); }
+      50% { transform: translateY(22px) scale(1.03); }
+      65% { transform: translateY(5px) scale(0.99); }
+      80% { transform: translateY(12px) scale(1.01); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* gentle horizontal drift – makes them feel alive */
+    @keyframes floatAround {
+      0% { left: 0%; }
+      25% { left: 2%; }
+      75% { left: -1.5%; }
+      100% { left: 0%; }
+    }
+
+    /* ----- THUMB-FRIENDLY CONTENT – LOWERED, EASY REACH ----- */
     .content {
       position: relative;
-      z-index: 20;              /* above blobs */
+      z-index: 20;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* PUSH EVERYTHING TO BOTTOM — thumb friendly */
+      justify-content: flex-end; /* push everything to bottom */
       align-items: center;
       min-height: 100vh;
       width: 100%;
-      padding: 20px 20px max(30px, env(safe-area-inset-bottom, 24px)) 20px;
+      padding: 20px 20px max(30px, env(safe-area-inset-bottom, 30px)) 20px;
       box-sizing: border-box;
-      pointer-events: none;     /* container doesn't trap clicks, button is clickable */
+      pointer-events: none;
     }
 
-    /* ----- LARGE BBC BUTTON – theme colours: red, white, black accent ----- */
+    /* ----- BBC BUTTON – large, red, iconic ----- */
     .bbc-button {
-      pointer-events: auto;     /* re-enable clicks */
+      pointer-events: auto;
       display: inline-block;
-      background: #BB1919;      /* BBC news red – iconic */
+      background: #BB1919;      /* BBC news red */
       color: white;
       border: none;
-      border-radius: 28px;      /* pill shape, modern and friendly */
+      border-radius: 28px;
       padding: 0.8em 1.8em;
-      font-size: clamp(2.2rem, 12vw, 3.8rem);   /* always large, never tiny */
+      font-size: clamp(2rem, 10vw, 3.4rem);
       font-weight: 800;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       font-family: 'Inter', 'Helvetica Neue', sans-serif;
       box-shadow: 
         0 16px 28px -8px rgba(0,0,0,0.4),
-        0 0 0 4px rgba(255,255,255,0.2),        /* white outline – BBC block accent */
+        0 0 0 4px rgba(255,255,255,0.2),
         inset 0 -4px 0 rgba(0,0,0,0.2);
       transition: transform 0.12s ease, background 0.2s, box-shadow 0.2s;
       cursor: pointer;
       max-width: 90vw;
       text-align: center;
       line-height: 1.2;
-      border: 2px solid rgba(255,255,255,0.8);  /* crisp white border – BBC vibe */
-      margin-bottom: 8px;        /* a little lift from bottom edge */
-      backdrop-filter: blur(4px); /* subtle glass, ties with background */
-      background: linear-gradient(145deg, #c01e1e, #ac1515);  # subtle depth
+      border: 2px solid rgba(255,255,255,0.8);
+      margin-bottom: 16px;       /* space between buttons */
+      backdrop-filter: blur(4px);
+      background: linear-gradient(145deg, #c01e1e, #ac1515);
     }
 
-    /* secondary BBC colours: black + white appear in hover + active */
     .bbc-button:hover {
       background: #a51414;
       transform: scale(1.02);
-      box-shadow: 
-        0 22px 32px -6px black,
-        0 0 0 6px rgba(255,255,255,0.3),
-        inset 0 -4px 0 rgba(0,0,0,0.3);
+      box-shadow: 0 22px 32px -6px black, 0 0 0 6px rgba(255,255,255,0.3), inset 0 -4px 0 rgba(0,0,0,0.3);
     }
-
     .bbc-button:active {
       transform: scale(0.97);
-      box-shadow: 
-        0 8px 18px -4px black,
-        0 0 0 6px rgba(255,255,255,0.5),
-        inset 0 4px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 18px -4px black, 0 0 0 6px rgba(255,255,255,0.5), inset 0 4px 6px rgba(0,0,0,0.2);
     }
-
-    /* focus state – accessibility + BBC black/yellow? but we keep red/white */
     .bbc-button:focus-visible {
       outline: 4px solid white;
       outline-offset: 4px;
     }
 
-    /* optional small descriptor – still lower, but minimal */
+    /* ----- TELEGRAM BUTTON – BBC theme colours, animated bounce ----- */
+    .telegram-button {
+      pointer-events: auto;
+      display: inline-block;
+      background: #222;         /* BBC blackish – sophisticated */
+      color: white;
+      border: 2px solid rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 0.6em 1.8em 0.6em 1.6em;
+      font-size: clamp(1.7rem, 8vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      box-shadow: 0 16px 24px -8px rgba(0,0,0,0.5), 0 0 0 2px rgba(187,25,25,0.4); /* red accent */
+      cursor: pointer;
+      max-width: 90vw;
+      text-align: center;
+      line-height: 1.3;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      margin-bottom: 8px;
+      /* telegram specific – brand icon + bounce animation */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: telegramBounce 2.2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .telegram-button i {
+      font-size: 1.3em;
+      color: #27A7E7;           /* Telegram blue – but retains BBC feel */
+      filter: drop-shadow(0 2px 4px black);
+    }
+
+    /* bounce animation specific to telegram button – subtle, friendly */
+    @keyframes telegramBounce {
+      0% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.02); }
+      60% { transform: translateY(-2px) scale(0.99); }
+      80% { transform: translateY(-3px) scale(1.01); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .telegram-button:hover {
+      background: #2d2d2d;
+      transform: scale(1.01);
+      box-shadow: 0 20px 28px -6px black, 0 0 0 4px rgba(187,25,25,0.5);
+    }
+    .telegram-button:active {
+      transform: scale(0.97);
+    }
+    .telegram-button:focus-visible {
+      outline: 4px solid white;
+      outline-offset: 4px;
+    }
+
     .thumb-hint {
       pointer-events: auto;
       color: rgba(255,255,255,0.8);
@@ -237,52 +255,32 @@
       text-transform: uppercase;
       font-weight: 500;
       margin-bottom: 16px;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       padding: 10px 24px;
       border-radius: 60px;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.3);
-      transition: 0.2s;
     }
 
-    .thumb-hint span {
-      font-weight: 700;
-      color: white;
-    }
-
-    /* everything lowered – additional bottom spacing only if needed */
+    /* responsive adjustments */
     @media (max-width: 480px) {
-      .bbc-button {
-        font-size: 2.5rem;
-        padding: 0.7em 1.4em;
-        border-radius: 24px;
-      }
-      .thumb-hint {
-        font-size: 0.9rem;
-        padding: 8px 20px;
-      }
+      .bbc-button { font-size: 2.2rem; padding: 0.7em 1.4em; }
+      .telegram-button { font-size: 1.8rem; padding: 0.6em 1.2em; }
+      .thumb-hint { font-size: 0.85rem; padding: 8px 18px; }
+      .bouncy-icon { font-size: 2rem; }
     }
 
-    /* for taller screens, keep content at bottom */
     @media (min-height: 700px) {
-      .content {
-        padding-bottom: max(48px, env(safe-area-inset-bottom, 36px));
-      }
+      .content { padding-bottom: max(48px, env(safe-area-inset-bottom, 42px)); }
     }
-
-    /* iPhone safe area + very bottom thumb zone */
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
-      .content {
-        padding-bottom: max(36px, env(safe-area-inset-bottom, 30px));
-      }
+      .content { padding-bottom: max(42px, env(safe-area-inset-bottom, 36px)); }
     }
-
-    /* bonus: bbc blocks vibe – subtle square in background? but we keep blob scene modern */
   </style>
 </head>
 <body>
 
-  <!-- ANIMATED MODERN BACKGROUND – organic blobs, BBC theme colours reinterpreted -->
+  <!-- MODERN BLOB BACKGROUND (colourful, ethereal) -->
   <div class="blob-scene">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -296,64 +294,89 @@
     <div class="blob blob-10"></div>
   </div>
 
-  <!-- MAIN INTERFACE – PUSHED DOWN FOR EASY THUMB REACH -->
+  <!-- BOUNCY THEMED ART – NEWS, SPORTS, MUSIC, FINANCIAL (some bounce up, some down) -->
+  <div class="art-scene">
+    <!-- NEWS icons (bouncing up) -->
+    <i class="fas fa-newspaper bouncy-icon bounce-up" style="top: 12%; left: 8%; font-size: 3rem; color: #FFD166; opacity: 0.8;"></i>
+    <i class="fas fa-broadcast-tower bouncy-icon bounce-up" style="top: 22%; left: 75%; font-size: 2.8rem; color: #FF9F1C; opacity: 0.75; animation-delay: 0.4s, 1.2s;"></i>
+    <i class="fas fa-radio bouncy-icon bounce-up" style="top: 60%; left: 15%; font-size: 2.6rem; color: #EF476F; opacity: 0.7; animation-delay: 0.9s, 0.3s;"></i>
+    <!-- NEWS bouncing down -->
+    <i class="fas fa-pager bouncy-icon bounce-down" style="top: 70%; left: 88%; font-size: 2.5rem; color: #F78C6B; opacity: 0.7; animation-delay: 0.2s, 0.7s;"></i>
+    <i class="fas fa-tv bouncy-icon bounce-down" style="top: 40%; left: 45%; font-size: 2.9rem; color: #D4A5A5; opacity: 0.8; animation-delay: 0.1s, 1.4s;"></i>
+
+    <!-- SPORTS icons (mix) -->
+    <i class="fas fa-futbol bouncy-icon bounce-up" style="top: 18%; left: 40%; font-size: 3.2rem; color: #C4E0A2; opacity: 0.9; animation-delay: 0.6s, 0.9s;"></i>
+    <i class="fas fa-basketball-ball bouncy-icon bounce-down" style="top: 75%; left: 30%; font-size: 2.8rem; color: #FFB347; opacity: 0.8; animation-delay: 1s, 0.1s;"></i>
+    <i class="fas fa-football-ball bouncy-icon bounce-up" style="top: 50%; left: 70%; font-size: 2.7rem; color: #A3C4F3; opacity: 0.75; animation-delay: 0.3s, 1.1s;"></i>
+    <i class="fas fa-baseball-ball bouncy-icon bounce-down" style="top: 85%; left: 55%; font-size: 2.5rem; color: #FADADD; opacity: 0.7; animation-delay: 1.3s, 0.5s;"></i>
+
+    <!-- MUSIC icons (bouncing up / down) -->
+    <i class="fas fa-music bouncy-icon bounce-up" style="top: 8%; left: 62%; font-size: 3rem; color: #B39CD0; opacity: 0.85; animation-delay: 0.7s, 1.7s;"></i>
+    <i class="fas fa-headphones bouncy-icon bounce-down" style="top: 33%; left: 18%; font-size: 2.8rem; color: #FAA0A0; opacity: 0.8; animation-delay: 0.5s, 0.2s;"></i>
+    <i class="fas fa-guitar bouncy-icon bounce-up" style="top: 68%; left: 48%; font-size: 2.9rem; color: #C0B9DD; opacity: 0.7; animation-delay: 1.1s, 0.8s;"></i>
+    <i class="fas fa-drum bouncy-icon bounce-down" style="top: 45%; left: 88%; font-size: 2.6rem; color: #E5989B; opacity: 0.7; animation-delay: 0.8s, 0.4s;"></i>
+
+    <!-- FINANCIAL icons (bouncing up / down) -->
+    <i class="fas fa-chart-line bouncy-icon bounce-up" style="top: 20%; left: 88%; font-size: 2.8rem; color: #B0E57C; opacity: 0.9; animation-delay: 0.2s, 1.3s;"></i>
+    <i class="fas fa-coins bouncy-icon bounce-down" style="top: 55%; left: 8%; font-size: 2.9rem; color: #FFD700; opacity: 0.8; animation-delay: 1.4s, 0.6s;"></i>
+    <i class="fas fa-chart-pie bouncy-icon bounce-up" style="top: 80%; left: 72%; font-size: 2.7rem; color: #6A994E; opacity: 0.75; animation-delay: 0.9s, 0.9s;"></i>
+    <i class="fas fa-sterling-sign bouncy-icon bounce-down" style="top: 15%; left: 28%; font-size: 2.5rem; color: #BC8F8F; opacity: 0.8; animation-delay: 0.1s, 0.5s;"></i>
+    <i class="fas fa-file-invoice-dollar bouncy-icon bounce-up" style="top: 92%; left: 20%; font-size: 2.6rem; color: #A7C7E7; opacity: 0.7; animation-delay: 0.6s, 1.8s;"></i>
+  </div>
+
+  <!-- MAIN INTERFACE – EVERYTHING LOWERED FOR THUMB -->
   <div class="content">
-    <!-- extra gentle hint (still within thumb zone) -->
     <div class="thumb-hint">
       <span>● BBC ●</span>  tap to open
     </div>
 
-    <!-- LARGE BBC BUTTON — opens bbc.com in new tab -->
+    <!-- LARGE BBC BUTTON (opens bbc.com) -->
     <button id="bbcOpenBtn" class="bbc-button">
       OPEN BBC
     </button>
-    <!-- subtle spacer (no extra content) – button is massive, thumb loves it -->
+
+    <!-- ANIMATED TELEGRAM BUTTON – BBC theme + bounce -->
+    <button id="telegramBtn" class="telegram-button">
+      <i class="fab fa-telegram-plane"></i> JOIN BBC CHANNEL
+    </button>
   </div>
 
   <script>
     (function() {
       "use strict";
-      
-      const bbcButton = document.getElementById('bbcOpenBtn');
-      
-      // Open BBC official website in new tab – respects user choice
-      function openBBC() {
-        window.open('https://www.bbc.com/', '_blank', 'noopener,noreferrer');
-        // optional haptic feedback for modern devices? just a clean open.
-      }
 
-      // attach event listeners
+      // OPEN BBC
+      const bbcButton = document.getElementById('bbcOpenBtn');
       if (bbcButton) {
         bbcButton.addEventListener('click', (e) => {
-          e.preventDefault();   // no double action if button inside form
-          openBBC();
+          e.preventDefault();
+          window.open('https://www.bbc.com/', '_blank', 'noopener,noreferrer');
         });
-
-        // touch devices – ensure no 300ms weirdness, response instant
-        bbcButton.addEventListener('touchstart', (e) => {
-          // just to feel snappy; we don't interfere
-        }, { passive: true });
       }
 
-      // Small UX: if someone expects 'Enter' key to work - natively it does on button.
+      // TELEGRAM BBC CHANNEL (demo – opens t.me/bbc_news_eng)
+      const telegramBtn = document.getElementById('telegramBtn');
+      if (telegramBtn) {
+        telegramBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // official BBC telegram channels exist; using bbcnews as likely channel
+          window.open('https://t.me/bbc_news_eng', '_blank', 'noopener,noreferrer');
+        });
+      }
     })();
   </script>
 
   <!-- 
     DESIGN NOTES:
-    –––  BBC THEME COLOURS  –––
-    * Primary button: #BB1919 (BBC News red), white text, white/black accents.
-    * Background blobs include #FF6B6B (modern red), #4ECDC4 (cyan), #FFE66D (yellow)
-      and others – all contemporary, vibrant, and dynamic.
-    –––  LOWERED FOR THUMB  –––
-    * Flex column with justify-content: flex-end pushes everything to bottom.
-    * Large padding-bottom respects safe areas, so thumb reaches without stretch.
-    * Button is MASSIVE (clamp 2.2rem–3.8rem) and placed near bottom edge.
-    –––  ANIMATED SHAPES  –––
-    * 10 irregular, soft-filtered blobs with distinct sizes and slow float.
-    * mix-blend-mode: screen + radial gradients for modern luminosity.
-    * border-radius values are organic (never perfect circles).
-    * continuous ease-in-out alternate motion.
+    –––  BBC THEME + BOUNCY ART  –––
+    * Large red "OPEN BBC" button remains.
+    * New "JOIN BBC CHANNEL" button styled with BBC black/red accents, Telegram icon, continuous bounce.
+    * Background now layers two scenes: 
+        1) soft, colourful blobs (modern, fluid)
+        2) FontAwesome icons: news, sports, music, financial – each with bounce-up OR bounce-down.
+    * Icons have varying sizes, colours, delays – some go up, others go down, all bouncy.
+    * Content is still flexed to bottom for easy thumb reach.
+    * Fully responsive, safe areas, no click interference.
   -->
 </body>
 </html>
